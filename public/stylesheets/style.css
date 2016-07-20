@@ -352,6 +352,10 @@ a:hover {
 
 }
 
+.crop-price {
+	font-size: 12px;
+}
+
 .crop-name-container {
 	height: 100%;
 	width: 100%;
@@ -359,8 +363,9 @@ a:hover {
 	opacity:0; 
 	filter:alpha(opacity=0);
 	font-family: poster;
-	font-size: 16px;
+	font-size: 18px;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
