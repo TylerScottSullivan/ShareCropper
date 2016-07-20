@@ -38,6 +38,11 @@ router.get('/messages', function(req, res, next) {
 	res.render('messages');
 });
 
+router.get('/map', function(req, res, next) {
+	console.log(req.user.cropArr)
+	res.render('map');
+});
+
 router.get('/cardinfo', function(req, res, next) {
 	res.render('cardinfo');
 });
