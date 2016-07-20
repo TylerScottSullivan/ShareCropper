@@ -1,10 +1,71 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+// var messages = [{name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}, {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}]
+var messages = []
+
+var MessageBox = React.createClass({
+	render: function() {
+
+		return (
+				<div className='message-box'>
+					<div className='message-header'>
+						<div className='message-name'>
+							{this.props.name}
+						</div>
+						<div className='message-preview-time'>
+							{this.props.time}
+						</div>
+					</div>
+					<div className='message-preview'>
+							{this.props.body}
+					</div>
+				</div>
+		);
+	}
+
+});
+
+
+
+
+
 var App = React.createClass({
   render: function() {
     return (
-      // {{> navbar}}
+<div> 
+<div className='navbarr'>
+	<div className='flex-ctrrr'>
+		<div className='land-btn logo'> SHARECROPPER </div>
+	</div>
+	<div className='in-line flex-end'>
+		<div className='flex-ctrrr'>
+			<input className='quer' type='text' placeholder='Search for locally grown produce...'/>
+			<button type="button" className="flex-ctrrr icon">
+  				<span className="glyphicon glyphicon-search" aria-hidden="true"></span>
+			</button>
+		</div>
+		<div className='flex-ctr'> 
+			<div className='land-btn' id='profile-btn'> Profile </div>
+		</div>
+		<div className='flex-ctr'> 
+			<div className='land-btn' id='home-btn'> Home </div>
+		</div>
+		<div className='flex-ctr'> 
+			<div className='land-btn' id='home-btn'> <a href='/messages'> Messages </a> </div>
+		</div>
+		<div> 
+			<button className='flex-ctr' data-toggle='collapse' data-target='#seebelow'>
+				<div className='land-btn flex-ctr drop' id='settings-btn'> Settings </div>
+			</button>
+			<div className='collapse' id='seebelow'>
+					<div className='flex-ctr dropp'> Garden </div>
+					<div className='flex-ctr dropp'> Sell </div>
+					<div className='flex-ctr dropp'> Log Out </div>
+			</div>
+		</div>
+	</div> 
+</div>
 
 <div className='user-message-body'>
 	<div className='message-container'>
@@ -16,43 +77,20 @@ var App = React.createClass({
 				<div className='message-box-title'>
 					Inbox
 				</div>
-				<div className='message-box'>
-					<div className='message-header'>
-						<div className='message-name'>
-							Austin Hawkins
-						</div>
-						<div className='message-preview-time'>
-							10:39 PM
-						</div>
-					</div>
-					<div className='message-preview'>
-						Hey Tyler I would like to...
-					</div>
-				</div>
-				<div className='message-box'>
-					<div className='message-name'>
-						Steven Lin
-					</div>
-					<div className='message-preview'>
-						Yo buddy
-					</div>
-				</div>
-				<div className='message-box'>
-					<div className='message-name'>
-						Sam Lee
-					</div>
-					<div className='message-preview'>
-						Tyler why do you think...
-					</div>
-				</div>
-				<div className='message-box'>
-					<div className='message-name'>
-						Tom Eng
-					</div>
-					<div className='message-preview'>
-						Hey Tyler you're right I...
-					</div>
-				</div>
+					{messages.length>0 ? 
+					messages.map(function(message, item) {
+						return 	<MessageBox key={item} name={message.name} time={message.time} body={message.body} />
+					}):
+						<div> You have no messages </div>
+					}
+
+
+
+
+
+
+
+
 			</div>
 			<div className='right-user-column-message'>
 				<div className='message-view-panel'>
@@ -96,7 +134,7 @@ var App = React.createClass({
 		</div>
 	</div>
 </div>
-
+</div>
 
     );
   }
