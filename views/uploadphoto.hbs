@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <form ref='uploadForm' 
+            id='uploadForm' 
+            action='http://localhost:3000/uploadphoto/{{cid}}' 
+            method='post' 
+            encType="multipart/form-data">
+            Upload your pictures: 
+                <input type="file" name="file" />
+                <input type='submit' value='Upload!' />
+        </form>		
+    </body>
+</html>

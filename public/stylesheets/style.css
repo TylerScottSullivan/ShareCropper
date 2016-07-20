@@ -1,0 +1,590 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  /*background: grey;*/
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+@font-face {
+	font-family: poster;
+	src: url('/fonts/SansPosterBold.ttf');
+}
+.navbarr {
+/*	padding: 0;
+	margin: 0;*/
+	background: white;
+	display: flex;
+	justify-content: space-between;
+	height: 50px;
+	font-weight: bold;
+	/*font-family: poster;*/
+	color: black;
+/*	width: 100%;*/
+}
+
+.logo {
+	font-size: 20px;
+	font-family: poster;
+}
+
+.land-btn {
+	margin: 0 10px;
+	/*text-align: center;*/
+}
+
+.flex-ctr {
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	border: none;
+	background: none;
+}
+
+.flex-ctrrr {
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	border: none;
+	background: none;
+}
+
+
+.flex-ctrr {
+	display: flex;
+	align-items: center;
+	color: #737373;
+}
+
+.flex-ctr:hover {
+	background-color: #f1f1f1;
+	color: black;
+}
+}
+
+#search {
+	height: 25px;
+}
+
+
+.in-line {
+	display: flex;
+	flex-direction: row;
+}
+
+
+.contain {
+	height: 600px;
+	width: 100%;
+}
+
+.bodyy {
+	background: url('/images/soil.jpg');
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-color: black;
+	background-position: 0px -150px;
+	/*background-size: contain;*/
+	position: relative;
+/*	height: 600px;*/
+	width: 100%;
+	height: 100%;
+/*	min-width: 1600px;*/
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#sc-title {
+	font-size: 90px;
+	color: white;
+	font-weight: 700px;
+	font-family: poster;
+}
+
+.btn-line {
+	display: flex;
+	justify-content: center;
+	color: black;
+	font-weight: 700px;
+	font-family: poster;
+}
+
+.land-btns {
+	margin: 80px 50px;
+	font-size: 35px;
+	padding: 20px;
+	border-style: solid;
+	border-radius: 10px;
+}
+
+.land-btns:hover {
+	color: white;
+	background-color: black;
+}
+
+.btn-sd-line {
+	display: flex;
+	justify-content: center;
+	color: black;
+	font-weight: 700px;
+	font-family: poster;
+}
+
+.btm-btn {
+	font-size: 25px;
+	margin: 30px 30px 10px 30px;
+}
+
+.drop {
+	height: 50px;
+}
+
+.dropp {
+	height: 40px;
+	background-color: #f1f1f1;
+	border-style: solid;
+	border-width: thin;
+	border-color: #a6a6a6;
+}
+
+.dropp:hover {
+	background-color: white;
+}
+
+.quer {
+	width: 300px;
+	height: 30px;
+	padding: 0 0 0 10px;
+}
+
+.icon {
+	height: 30px;
+}
+
+.search-bar-home {
+	margin-top: 45px;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	border: none;
+	background: none;
+	height: 90px;
+
+}
+
+.quer-home {
+	width: 420px;
+	padding: 5px 0 0 10px;
+	height: 40px;
+	/*font-weight: bold;*/
+	font-size: 20px;
+	border: 0;
+	border-style: solid;
+	border-right-color: #a6a6a6;
+	border-right-width: 1px;
+
+}
+
+.search-home-icon {
+	height: 40px;
+	width: 40px;
+	padding: 5px 0 0 0;
+	align-items: center;
+	border: none;
+	background: white;
+	border: 0;
+}
+
+.quer-location {
+	width: 200px;
+	padding: 5px 0 0 10px;
+	height: 40px;
+	/*font-weight: bold;*/
+	font-size: 20px;
+	border: 0;
+	border-style: solid;
+	border-right-color: #a6a6a6;
+	border-right-width: 1px;
+<<<<<<< HEAD
+}
+
+
+/*user profile css*/
+
+.userprofile-body {
+	display: flex;
+	justify-content: center;
+	margin: 20px 0;
+}
+
+.left-user-column {
+	width: 300px;
+	margin: 10px 5px;
+	background-color: pink;
+
+}
+
+.user-image {
+
+}
+
+.right-user-column {
+	width: 650px;
+	margin: 10px 5px;
+	/*background-color: grey;*/
+
+}
+
+.title-name {
+	font-family: poster;
+	font-size: 40px;
+	margin: 0 0 10px 0;
+
+}
+
+.user-biography {
+	font-size: 16px;
+	margin: 20px 15px;
+
+}
+
+.follow-line {
+	margin: 10px 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+}
+
+.one-follow {
+	margin: 0 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+
+.follow-number {
+	font-size: 30px;
+	font-weight: 700px;
+	font-family: poster;
+	margin: 0 5px;
+
+	
+}
+
+.follow-word {
+	font-weight: 700px;
+
+}
+
+.follow-line-button {
+	font-family: poster;
+	font-size: 24px;
+	margin: 10px;
+}
+
+/*seller profile crop grid css*/
+
+.crop-box {
+	margin: 30px 0 0 0 ;
+	padding: 20px;
+	/*background-color: pink;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-style: solid ;
+
+}
+
+.crop-title {
+	font-family: poster;
+	font-size: 30px;
+}
+
+.crop-class-cat {
+	width: 100%;
+	position: relative;
+	font-family: poster;
+	font-size: 18px;
+
+}
+
+.crop-grid {
+	width: 100%;
+	position: relative;
+	display: flex;
+	flex-flow: row wrap;
+	/*justify-content: flex-start;*/
+
+
+}
+
+.crop-grid-unit {
+	margin: 7px;
+	height: 180px;
+	width: 185px;
+	background-color: orange;
+
+}
+
+
+
+.crop-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	position: relative;
+
+}
+
+.crop-name-container {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	opacity:0; 
+	filter:alpha(opacity=0);
+	font-family: poster;
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.crop-name-container:hover {
+	background-color: pink;
+	opacity: 100;
+}
+
+/*messages css*/
+
+.user-message-body {
+	display: flex;
+	justify-content: center;
+	margin: 20px 0 0 0;
+	/*background-color: pink;*/
+}
+
+.message-container {
+	width: 970px;
+	/*background-color: orange;*/
+}
+
+.messages-title {
+	font-family: poster;
+	font-size: 40px;
+	padding: 10px 0;
+	border-bottom-style: solid;
+}
+
+.messages-columns-body {
+	display: flex;
+	justify-content: center;
+	height: 700px;
+	border-bottom-style: solid;
+	border-color: #f1f1f1;
+	border-width: 2px;
+}
+
+.left-user-column-message {
+	width: 310px;
+	padding: 0 5px;
+	/*background-color: white;*/
+	border-left-style: solid;
+	border-right-style: solid;
+	border-right-color: black;
+	border-left-color: #f1f1f1;
+	border-width: 2px;
+}
+
+.right-user-column-message {
+	width: 685px;
+	padding: 0 5px;
+	border-right-style: solid;
+	border-color: #f1f1f1;
+	border-width: 2px;
+	/*background-color: pink;*/
+	position: relative;
+	height: 100%;
+}
+
+
+.message-box-title {
+	font-family: poster;
+	font-size: 18px;
+	padding: 10px 0;
+	border-bottom-style: solid;
+}
+
+.message-box {
+	border-bottom-style: solid;
+	border-color: #f1f1f1;
+	border-width: 2px;
+	padding: 10px 5px;
+
+}
+
+.message-header {
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+.message-name {
+	font-weight: bold;
+	padding: 0 0 5px 0;
+	font-size: 16px;
+
+}
+
+.message-preview-time {
+}
+
+.message-preview {
+
+}
+
+.message-sender {
+	font-family: poster;
+	font-size: 18px;
+	padding: 10px 0;
+	border-bottom-style: solid;
+	/*border-left-style: solid;*/
+
+}
+
+
+.message-view-panel {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/*background-color: orange;*/
+
+}
+
+.messages-expanded {
+
+}
+
+.message-body {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.sender-message-object {
+	padding: 10px;
+	margin: 5px;
+	border-radius: 10px;
+	align-self: flex-start;
+	background-color: #66ff66;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.sender-message-content {
+	font-weight: 600;
+	padding-bottom: 5px;
+
+}
+
+.sender-message-time {
+	font-weight: 400px;
+	font-size: 12px;
+
+
+}
+
+.receiver-message-object {
+	align-self: flex-end;
+	background-color: #ffff66;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 10px;
+	max-width: 300px;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.receiver-message-content {
+	font-weight: 600;
+	padding-bottom: 5px;
+
+
+}
+
+.receiver-message-time {
+	font-weight: 400px;
+	font-size: 12px;
+	align-self: flex-end;
+
+
+}
+
+.message-input-box {
+	padding: 15px 10px 10px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	border-top-style: solid;
+
+}
+
+.message-input-field {
+	height: 45px;
+	width: 630px;
+
+}
+
+.message-input-button-box {
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
+}
+
+.message-input-button {
+	margin: 5px;
+	padding: 10px;
+	background-color: black;
+	font-family: poster;
+	font-size:12px;
+	color: white;
+
+}
+
+.send-btn {
+	background-color: #33ff33;
+	color: white;
+	/*font-weight: 600;*/
+}
+
+.request-btn {
+	background-color: #ffff66;
+	color: black;
+	/*font-weight: 600;*/
+
+}
+
+textarea {
+	resize: none;
+}
+

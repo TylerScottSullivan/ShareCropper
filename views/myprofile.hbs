@@ -1,0 +1,58 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
+			Profile pic here
+		</div>
+		<div class="col-sm-7">
+			<h3>{{user.first}}'s Profile</h3>
+		</div>
+		<div class="col-sm-1">
+			<a href="/home">Back home</a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-7 col-sm-offset-1">
+			<p>Basic user information:<br>
+				Full Name: {{user.first}} {{user.last}}<br>
+				E-mail: {{user.email}}<br>
+				{{#if user.seller}}
+				Seller: True<br>
+				{{else}}
+				Seller: False<br>
+				{{/if}}
+				{{#if user.grower}}
+				Grower: True<br>
+				{{else}}
+				Grower: False<br>
+				{{/if}}
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="container" style="border: 2px solid green">
+	<div class="row">
+		<p class="text-center">{{user.first}}'s Garden</p>
+	</div>
+
+	<div class="row">
+		<a href="/creategarden">Add a plot</a>
+		<div class="col-sm-10 col-sm-offset-1">
+			{{#each crop}}
+			<div class="row" style="border: 2px solid black">
+				<p class="text-center">
+					This plot contains {{cropname}}. They are priced at ${{price}} per {{unit}} and are currently {{status}}. 
+				</p>
+			</div>
+			{{else}}
+			<div class="row">
+				<p class="text-center">
+					No crops in this garden
+				</p>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+</div>
+
