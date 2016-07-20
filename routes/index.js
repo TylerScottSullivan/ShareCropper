@@ -183,7 +183,15 @@ router.get('/transactions', function(req, res, next) {
 });
 
 router.get('/myprofile', function(req, res, next) {
-	res.render('myprofile');
+	User.findOne({_id: req.user._id}).populate('cropArr').exec(function(err, user) {
+		if (err) {
+			console.log(err)
+		}
+		res.render('myprofile', {
+			user: user,
+			crop: user.cropArr
+		});
+	});
 });
 
 router.get('/profile/:id', function(req, res, next) {
@@ -217,10 +225,18 @@ router.get('/profile/:id', function(req, res, next) {
 			if (err) {
 				console.log(err);
 			}
-			res.render('userprofile', {
-				user: user,
-				crop: user.cropArr
-			});
+			if (user.seller) {
+				res.render('sellerprofile', {
+					user: user,
+					crop: user.cropArr
+				});
+			}
+			else {
+				res.render('userprofile', {
+					user: user,
+					crop: user.cropArr
+				});
+			}
 		});
 	};
 });

@@ -16,16 +16,8 @@
 			<p>Basic user information:<br>
 				Full Name: {{user.first}} {{user.last}}<br>
 				E-mail: {{user.email}}<br>
-				{{#if user.seller}}
-				Seller: True<br>
-				{{else}}
-				Seller: False<br>
-				{{/if}}
-				{{#if user.grower}}
-				Grower: True<br>
-				{{else}}
-				Grower: False<br>
-				{{/if}}
+				Seller: {{user.seller}}<br>
+				Grower: {{user.grower}}<br>
 			</p>
 		</div>
 	</div>
