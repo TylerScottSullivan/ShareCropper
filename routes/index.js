@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models/models')
 var User = models.User;
+var Follows = models.Follows;
 
 
 var Crop = models.Crop;
@@ -232,26 +233,75 @@ router.get('/profile/:id', function(req, res, next) {
 		res.redirect('/myprofile')
 	}
 	else {
-		User.findOne({_id: req.params.id}).populate('cropArr').exec(function(err, user) {
+		User.findOne({_id: req.params.id}).populate('cropArr following').exec(function(err, user) {
 			if (err) {
 				console.log(err);
 			}
-			if (user.seller) {
-				console.log("its a seller");
-				res.render('sellerprofile', {
-					user: user,
-					crop: user.cropArr
-				});
-			}
 			else {
-				console.log("not a seller");
-				res.render('userprofile', {
-					user: user,
-					crop: user.cropArr
+				var user = user;
+				Follows.find({iamfollowed: req.params.id}, function(err, follows) {
+					if (err) {
+						console.log(err)
+					}
+					else if (user.seller) {
+						res.render('sellerprofile', {
+							user: user,
+							crop: user.cropArr,
+							following: user.following,
+							followers: follows
+						});
+					}
+					else {
+						res.render('userprofile', {
+							user: user,
+							crop: user.cropArr,
+							following: user.following,
+							followers: follows
+						});
+					}
 				});
 			}
+			
 		});
 	};
+});
+
+router.get('/follow/:id', function(req, res, next) {
+	Follows.find({iamfollower: req.user._id, iamfollowed: req.params.id}, function(err, docs) {
+		if (err) {
+			console.log(err)
+		}
+		else if (docs.length) {
+			res.redirect('/profile/'+req.params.id);
+		}
+		else {
+			var newFollow = new models.Follows ({
+				iamfollower: req.user._id,
+				iamfollowed: req.params.id
+			});
+			newFollow.save(function(err, success) {
+				if (err) {
+					console.log(err)
+					next(err)
+				}
+				else {
+					User.findByIdAndUpdate(req.user._id, {
+						'following': req.user.following.concat(newFollow._id)
+					}, function(err, user) {
+						if (err) {
+							console.log(err)
+							next(err)
+						}
+						else {
+							console.log("added a follower", user.following)
+							res.redirect('/profile/'+req.params.id);
+						}
+					});
+				}
+			});
+		}
+	})
+	
 });
 
 

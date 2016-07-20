@@ -3,7 +3,7 @@
 <div class='userprofile-body'>
 	<div class='left-user-column'>
 		<div class='user-image'> 
-			MYIMAGE
+			{{user.profileimg}}
 		</div>
 	</div>
 	<div class='right-user-column'>
@@ -15,14 +15,14 @@
 		</div>
 		<div class =  'follow-line'> 
 			<div class = 'one-follow'> 
-				<div class = 'follow-number'> 29 </div>
+				<div class = 'follow-number'>  {{following.length}} </div>
 				<div class = 'follow-word'> Following </div>
 			</div>
 			<div class = 'one-follow'> 
-				<div class = 'follow-number'> 101 </div>
+				<div class = 'follow-number'> {{followers.length}} </div>
 				<div class = 'follow-word'> Followers </div>
 			</div>
-			<div class = 'follow-line-button'> Follow </div>
+			<div class = 'follow-line-button'><a href='/follow/{{user._id}}'> Follow </a></div>
 			<div class = 'follow-line-button'> Message </div>
 		</div>
 		<div class = 'crop-box'>
@@ -33,51 +33,20 @@
 				For Sale
 			</div>
 			<div class = 'crop-grid'>
-				<div class = 'crop-grid-unit'>
-					<div class= 'crop-image'>
-						<div class='crop-name-container'>
-							<div class='crop-name'>
-								Carrots
+				{{#each crop}}
+					{{#if instore}}
+						<div class = 'crop-grid-unit'>
+							<div class= 'crop-image'>
+								<div class='crop-name-container'>
+									<div class='crop-name'>
+										{{cropname}}<br>
+										({{status}})
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class = 'crop-grid-unit'>
-					<div class= 'crop-image'>
-						<div class='crop-name-container'>
-							<div class='crop-name'>
-								Carrots
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class = 'crop-grid-unit'>
-					<div class= 'crop-image'>
-						<div class='crop-name-container'>
-							<div class='crop-name'>
-								Carrots
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class = 'crop-grid-unit'>
-					<div class= 'crop-image'>
-						<div class='crop-name-container'>
-							<div class='crop-name'>
-								Carrots
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class = 'crop-grid-unit'>
-					<div class= 'crop-image'>
-						<div class='crop-name-container'>
-							<div class='crop-name'>
-								Carrots
-							</div>
-						</div>
-					</div>
-				</div>
+					{{/if}}
+				{{/each}}
 			</div>
 		</div>
 	</div>
