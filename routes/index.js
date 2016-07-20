@@ -194,9 +194,20 @@ router.get('/myprofile', function(req, res, next) {
 	});
 });
 
-router.get('/profile/:id', function(req, res, next) {
-	res.render('userprofile');
-});
+router.post('/myprofile', function(req, res, next) {
+	User.findByIdAndUpdate(req.user._id, {
+		'seller': !req.user.seller
+	}, function(err, user) {
+		if (err) {
+			console.log(err);
+			next(err)
+		}
+		else {
+			console.log("Changed seller status: ", req.user.seller);
+			res.redirect('/myprofile')
+		}
+	})
+})
 
 router.get('/testprof', function(req, res, next) {
 	res.render('userprofile');
@@ -217,7 +228,7 @@ router.get('/testseller', function(req, res, next) {
 });
 
 router.get('/profile/:id', function(req, res, next) {
-	if (toString(req.params.id) === toString(req.user._id)) {
+	if (req.params.id.toString() === req.user._id.toString()) {
 		res.redirect('/myprofile')
 	}
 	else {
@@ -226,12 +237,14 @@ router.get('/profile/:id', function(req, res, next) {
 				console.log(err);
 			}
 			if (user.seller) {
+				console.log("its a seller");
 				res.render('sellerprofile', {
 					user: user,
 					crop: user.cropArr
 				});
 			}
 			else {
+				console.log("not a seller");
 				res.render('userprofile', {
 					user: user,
 					crop: user.cropArr
