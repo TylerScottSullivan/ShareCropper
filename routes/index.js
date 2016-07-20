@@ -31,6 +31,28 @@ router.get('/home', function(req, res, next) {
 	});
 });
 
+router.get('/editprofile', function(req, res, next) {
+	res.render('editprofile', {
+		user: req.user
+	});
+});
+
+router.post('/editprofile', function(req, res, next) {
+	User.findByIdAndUpdate(req.user._id, {
+		first: req.body.first,
+		last: req.body.last,
+		biography: req.body.biography
+	}, function(err, user) {
+		if (err) {
+			console.log(err)
+			next(err)
+		}
+		else {
+			res.redirect('/myprofile')
+		}
+	})
+})
+
 router.get('/about',  function(req, res, next) {
 	res.render('about');
 });

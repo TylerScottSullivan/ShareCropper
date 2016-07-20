@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="row">
+		<h2>Edit your information</h2>
+	</div>
+
+	<form method="POST">
+
+		<div class="form-group">
+			<label for="first">First Name:</label>
+			<input type="text" class="form-control" name="first" value="{{user.first}}">
+		</div>
+
+		<div class="form-group">
+			<label for="last">Last Name:</label>
+			<input type="text" class="form-control" name="last" value="{{user.last}}">
+		</div>
+
+		<div class="form-group">
+			<label for="biography">Biography:</label>
+			<textarea class="form-control" rows="5" name="biography" value="{{user.biography}}"></textarea>
+		</div>
+
+		<button type="submit" class="btn btn-success">Save Changes</button>
+
+	</div>
+
+</div>
