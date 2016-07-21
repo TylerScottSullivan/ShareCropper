@@ -23,6 +23,8 @@ var FacebookStrategy = require('passport-facebook');
 mongoose.createConnection(process.env.MONGODB_URI);
 
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -143,5 +145,28 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// websockets
+
+io.on('connection', function (socket) {
+  console.log('connected');
+
+// get socket.username
+  // io.on('username', function(username) {
+  //   // ...
+  // models.message.find({$or: [from: socket.username, to: socket.username]}, function(err, messages) {
+  //   //handle error
+  //   messages.forEach(function(message) {
+  //     socket.join(generateRoomname(message.from, message.to))
+  //     socket.emit('message', {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"})
+  //   })
+  // })
+  // })
+})
+
+
+var port = process.env.PORT || 3000;
+server.listen(port, function() {
+  console.log('Started, listening on port ', port);
+});
 
 module.exports = app;
