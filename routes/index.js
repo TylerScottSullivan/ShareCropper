@@ -26,7 +26,7 @@ router.get('/home', function(req, res, next) {
 	});
 });
 
-<<<<<<< HEAD
+
 router.get('/editprofile', function(req, res, next) {
 	res.render('editprofile', {
 		user: req.user
@@ -52,8 +52,6 @@ router.post('/editprofile', function(req, res, next) {
 router.get('/about',  function(req, res, next) {
 	res.render('about');
 });
-=======
->>>>>>> refs/remotes/origin/master
 
 router.get('/messages', function(req, res, next) {
 	res.render('messages', {
@@ -170,7 +168,6 @@ router.get('/transactions', function(req, res, next) {
 });
 
 router.get('/myprofile', function(req, res, next) {
-<<<<<<< HEAD
 	User.findOne({_id: req.user._id}).populate('cropArr').exec(function(err, user) {
 		if (err) {
 			console.log(err)
@@ -196,12 +193,6 @@ router.post('/myprofile', function(req, res, next) {
 		}
 	})
 })
-=======
-	res.render('myprofile', {
-		user: req.user
-	});
-});
->>>>>>> refs/remotes/origin/master
 
 // router.get('/profile/:id', function(req, res, next) {
 // 	res.render('sellerprofile', {
@@ -211,12 +202,7 @@ router.post('/myprofile', function(req, res, next) {
 
 
 router.get('/profile/:id', function(req, res, next) {
-<<<<<<< HEAD
 	if (req.params.id.toString() === req.user._id.toString()) {
-=======
-	if (toString(req.params.id) === toString(req.user._id)) {
-		console.log('in wrong place')
->>>>>>> refs/remotes/origin/master
 		res.redirect('/myprofile')
 	}
 	else {
@@ -224,7 +210,6 @@ router.get('/profile/:id', function(req, res, next) {
 			if (err) {
 				console.log(err);
 			}
-<<<<<<< HEAD
 			else {
 				var user = user;
 				Follows.find({iamfollowed: req.params.id}, function(err, follows) {
@@ -250,12 +235,6 @@ router.get('/profile/:id', function(req, res, next) {
 				});
 			}
 			
-=======
-			res.render('sellerprofile', {
-				user: user,
-				crop: user.cropArr
-			});
->>>>>>> refs/remotes/origin/master
 		});
 	};
 });
