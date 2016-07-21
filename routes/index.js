@@ -30,9 +30,6 @@ router.get('/home', function(req, res, next) {
 	});
 });
 
-router.get('/about',  function(req, res, next) {
-	res.render('about');
-});
 
 router.get('/messages', function(req, res, next) {
 	res.render('messages');
@@ -42,13 +39,7 @@ router.get('/cardinfo', function(req, res, next) {
 	res.render('cardinfo');
 });
 
-router.get('/reportproblem', function(req, res, next) {
-	res.render('reportproblem');
-});
 
-router.get('/contact', function(req, res, next) {
-	res.render('contact');
-});
 
 router.get('/creategarden', function(req, res, next) {
 	res.render('creategarden');
@@ -190,13 +181,6 @@ router.get('/profile/:id', function(req, res, next) {
 	res.render('userprofile');
 });
 
-router.get('/testprof', function(req, res, next) {
-	res.render('userprofile');
-});
-
-router.get('/testseller', function(req, res, next) {
-	res.render('sellerprofile');
-});
 
 router.get('/profile/:id', function(req, res, next) {
 	if (toString(req.params.id) === toString(req.user._id)) {

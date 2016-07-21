@@ -5,6 +5,32 @@ var passport = require('passport');
 
 module.exports = function(passport) {
 
+	router.get('/', function(req, res, next) {
+		res.render('index', {
+			title: 'Sharecropper'
+		});
+	});
+
+	router.get('/about',  function(req, res, next) {
+		res.render('about');
+	});
+
+	router.get('/reportproblem', function(req, res, next) {
+		res.render('reportproblem');
+	});
+
+	router.get('/contact', function(req, res, next) {
+		res.render('contact');
+	});
+
+	router.get('/testprof', function(req, res, next) {
+		res.render('userprofile');
+	});
+
+	router.get('/testseller', function(req, res, next) {
+		res.render('sellerprofile');
+	});
+
 	router.get('/signup', function(req, res, next){
 		res.render('signup');
 	});
@@ -61,6 +87,15 @@ module.exports = function(passport) {
 	    res.redirect('/home');
 	    // DO SHIT HERE
 	  });
+
+
+	  router.use(function(req, res, next) {
+	    if (!req.user) {
+	      res.redirect('/login');
+	    } else {
+	      next();
+	    }
+	  })
 
 	router.get('/logout', function(req, res, next){
 		req.logout();
