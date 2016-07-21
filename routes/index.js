@@ -63,8 +63,6 @@ router.get('/cardinfo', function(req, res, next) {
 	res.render('cardinfo');
 });
 
-
-
 router.get('/creategarden', function(req, res, next) {
 	res.render('creategarden');
 });
@@ -92,7 +90,6 @@ router.post('/creategarden', function(req, res, next) {
                     next(err)
                 }
                 else {
-                    console.log("CREATED NEW CROP", req.user);
                     res.redirect('/myprofile')
                 }
             })
@@ -179,7 +176,7 @@ router.get('/myprofile', function(req, res, next) {
 	});
 });
 
-router.post('/myprofile', function(req, res, next) {
+router.get('/sellerstatus', function(req, res, next) {
 	User.findByIdAndUpdate(req.user._id, {
 		'seller': !req.user.seller
 	}, function(err, user) {
@@ -188,7 +185,6 @@ router.post('/myprofile', function(req, res, next) {
 			next(err)
 		}
 		else {
-			console.log("Changed seller status: ", req.user.seller);
 			res.redirect('/myprofile')
 		}
 	})
@@ -275,21 +271,6 @@ router.get('/follow/:id', function(req, res, next) {
 			});
 		}
 	})
-	
 });
-
-
-
-
-	// User.findOne({_id:req.user._id}).populate('cropArr').exec(function(err, user) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	}
-	// 	console.log("user: ", user);
-	// 	res.render('myprofile', {
-	// 		user: user,
-	// 		crop: user.cropArr
-	// 	})
-	// });
 
 module.exports = router;
