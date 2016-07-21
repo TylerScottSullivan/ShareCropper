@@ -1,5 +1,6 @@
-{{> navbar}}
+{{> navbar this}}
 
 <div id="root"></div>
 <script src="/socket.io/socket.io.js"></script>
+<script> window.ids = ['{{myId}}', '{{theirId}}'] </script>
 <script src="/bundle.js"></script>

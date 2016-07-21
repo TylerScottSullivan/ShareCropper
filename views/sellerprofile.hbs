@@ -8,7 +8,7 @@
 	</div>
 	<div class='right-user-column'>
 		<div class='title-name'>
-			Austin Hawkins
+			{{user.first}}
 		</div>
 		<div class = 'user-biography'>
 			Hello I am a very special pereson and I like to garden. Do you like to garden? If you like to garden, please message me and we can garden together or I can sell you someo of my yummy fruits and vegetables!
@@ -23,7 +23,7 @@
 				<div class = 'follow-word'> Followers </div>
 			</div>
 			<div class = 'follow-line-button'> Follow </div>
-			<div class = 'follow-line-button'> Message </div>
+			<div class = 'follow-line-button'> <a href='/message/{{user.id}}'> Message </a></div>
 		</div>
 		<div class = 'crop-box'>
 			<div class = 'crop-title'>

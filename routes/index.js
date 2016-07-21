@@ -187,10 +187,9 @@ router.get('/profile/:id', function(req, res, next) {
 	console.log(req.params.id, 'id of profile')
 	console.log(req.user._id, 'id of user')
 	//if (toString(req.params.id) === toString(req.user._id)) {
-	if(req.user_id == req.params.id) {
-		console.log('in wrong place')
-		res.redirect('/myprofile')
-	}
+	if (req.params.id.toString() === req.user._id.toString()) {
+        res.redirect('/myprofile')
+    }
 	else {
 		User.findOne({_id: req.params.id}).populate('cropArr').exec(function(err, user) {
 			if (err) {
@@ -204,6 +203,13 @@ router.get('/profile/:id', function(req, res, next) {
 	};
 });
 
+
+router.get('/message/:id', function(req, res, next) {
+	res.render('messages', {
+		myId: req.user._id,
+		theirId: req.params.id
+	});
+})
 	// User.findOne({_id:req.user._id}).populate('cropArr').exec(function(err, user) {
 	// 	if (err) {
 	// 		console.log(err);

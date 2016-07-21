@@ -149,6 +149,28 @@ app.use(function(err, req, res, next) {
 
 io.on('connection', function (socket) {
   console.log('connected');
+  socket.on('Ids', function(Ids) {
+    console.log(Ids, 'Ids');
+
+    models.Messages.find({$or: [{from: Ids[0], to: Ids[1]}, {from: Ids[1], to:Ids[0]}]}, function(err, messages) {
+      if(err) {
+        console.log(err)
+      } else {
+        console.log(messages)
+      }
+    })
+
+    var room = Ids.sort().join(',');
+    socket.join(room, function() {
+      console.log('Successfully joined ' + room);
+    }) 
+
+  })
+
+
+
+
+
 
 // get socket.username
   // io.on('username', function(username) {

@@ -111,6 +111,11 @@ var MessageSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		default: "regular"
+	},
+	read: {
+		type: Boolean,
+		required: true,
+		default: false
 	}
 });
 

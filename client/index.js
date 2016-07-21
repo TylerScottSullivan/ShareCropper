@@ -70,7 +70,8 @@ var App = React.createClass({
   getInitialState: function() {
     return {
       socket: io(),
-      messages: [{name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}, {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}]
+      messages: [{name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}, {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}],
+      newmessage: ''
     }   
   },
   componentDidMount: function() {
@@ -79,7 +80,12 @@ var App = React.createClass({
     this.state.socket.on('connect', function() {
       console.log('connected');
       // YOUR CODE HERE (2)
-      this.state.socket.emit('room', this.state.roomName);
+
+      this.state.socket.emit('Ids', ids);
+
+
+
+
     }.bind(this));
 
     this.state.socket.on('message', function(message) {
@@ -90,6 +96,20 @@ var App = React.createClass({
     }.bind(this));
 
   },
+
+
+  onTextInput: function(event) {
+  	this.setState({
+  		newmessage: event.target.value
+  	})
+  },
+
+  Send: function(event) {
+  	console.log(this.state.newmessage);
+  },
+
+
+
 
   render: function() {
     return (
@@ -124,10 +144,10 @@ var App = React.createClass({
 
 					</div>
 					<div className='message-input-box'>
-						<textarea type='text' className='message-input-field'>
+						<textarea type='text' className='message-input-field' onChange={this.onTextInput}>
 						</textarea>
 						<div className='message-input-button-box'>
-							<div className='message-input-button send-btn'>
+							<div className='message-input-button send-btn' onClick={this.Send}>
 								Send
 							</div>
 							<div className='message-input-button request-btn'>
