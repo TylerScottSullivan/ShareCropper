@@ -239,16 +239,6 @@ router.get('/testprof', function(req, res, next) {
 
 router.get('/testseller', function(req, res, next) {
 	res.render('sellerprofile');
-	User.findOne({_id:req.user._id}).populate('cropArr').exec(function(err, user) {
-		if (err) {
-			console.log(err);
-		}
-		console.log("user: ", user);
-		res.render('myprofile', {
-			user: user,
-			crop: user.cropArr
-		})
-	});
 });
 
 router.get('/profile/:id', function(req, res, next) {
@@ -289,6 +279,7 @@ router.get('/profile/:id', function(req, res, next) {
 	};
 });
 
+
 router.get('/follow/:id', function(req, res, next) {
 	Follows.find({iamfollower: req.user._id, iamfollowed: req.params.id}, function(err, docs) {
 		if (err) {
@@ -328,5 +319,17 @@ router.get('/follow/:id', function(req, res, next) {
 });
 
 
+
+
+	// User.findOne({_id:req.user._id}).populate('cropArr').exec(function(err, user) {
+	// 	if (err) {
+	// 		console.log(err);
+	// 	}
+	// 	console.log("user: ", user);
+	// 	res.render('myprofile', {
+	// 		user: user,
+	// 		crop: user.cropArr
+	// 	})
+	// });
 
 module.exports = router;
