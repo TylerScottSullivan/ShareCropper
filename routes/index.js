@@ -184,7 +184,10 @@ router.get('/myprofile', function(req, res, next) {
 
 
 router.get('/profile/:id', function(req, res, next) {
-	if (toString(req.params.id) === toString(req.user._id)) {
+	console.log(req.params.id, 'id of profile')
+	console.log(req.user._id, 'id of user')
+	//if (toString(req.params.id) === toString(req.user._id)) {
+	if(req.user_id == req.params.id) {
 		console.log('in wrong place')
 		res.redirect('/myprofile')
 	}
