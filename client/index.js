@@ -94,38 +94,6 @@ var App = React.createClass({
   render: function() {
     return (
 <div> 
-<div className='navbarr'>
-	<div className='flex-ctrrr'>
-		<div className='land-btn logo'> SHARECROPPER </div>
-	</div>
-	<div className='in-line flex-end'>
-		<div className='flex-ctrrr'>
-			<input className='quer' type='text' placeholder='Search for locally grown produce...'/>
-			<button type="button" className="flex-ctrrr icon">
-  				<span className="glyphicon glyphicon-search" aria-hidden="true"></span>
-			</button>
-		</div>
-		<div className='flex-ctr'> 
-			<div className='land-btn' id='profile-btn'> Profile </div>
-		</div>
-		<div className='flex-ctr'> 
-			<div className='land-btn' id='home-btn'> Home </div>
-		</div>
-		<div className='flex-ctr'> 
-			<div className='land-btn' id='home-btn'> <a href='/messages'> Messages </a> </div>
-		</div>
-		<div> 
-			<button className='flex-ctr' data-toggle='collapse' data-target='#seebelow'>
-				<div className='land-btn flex-ctr drop' id='settings-btn'> Settings </div>
-			</button>
-			<div className='collapse' id='seebelow'>
-					<div className='flex-ctr dropp'> Garden </div>
-					<div className='flex-ctr dropp'> Sell </div>
-					<div className='flex-ctr dropp'> Log Out </div>
-			</div>
-		</div>
-	</div> 
-</div>
 
 <div className='user-message-body'>
 	<div className='message-container'>
