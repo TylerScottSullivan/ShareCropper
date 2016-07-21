@@ -18,11 +18,6 @@ var s3 = require('s3');
 //   res.render('index', { title: 'Express' });
 // });
 
-router.get('/', function(req, res, next) {
-	res.render('index', {
-		title: 'Sharecropper'
-	});
-});
 
 router.get('/home', function(req, res, next) {
 	res.render('home', {
@@ -32,7 +27,9 @@ router.get('/home', function(req, res, next) {
 
 
 router.get('/messages', function(req, res, next) {
-	res.render('messages');
+	res.render('messages', {
+		user: req.user
+	});
 });
 
 router.get('/cardinfo', function(req, res, next) {
@@ -174,16 +171,21 @@ router.get('/transactions', function(req, res, next) {
 });
 
 router.get('/myprofile', function(req, res, next) {
-	res.render('myprofile');
+	res.render('myprofile', {
+		user: req.user
+	});
 });
 
-router.get('/profile/:id', function(req, res, next) {
-	res.render('userprofile');
-});
+// router.get('/profile/:id', function(req, res, next) {
+// 	res.render('sellerprofile', {
+// 		user: req.user
+// 	});
+// });
 
 
 router.get('/profile/:id', function(req, res, next) {
 	if (toString(req.params.id) === toString(req.user._id)) {
+		console.log('in wrong place')
 		res.redirect('/myprofile')
 	}
 	else {
@@ -191,7 +193,7 @@ router.get('/profile/:id', function(req, res, next) {
 			if (err) {
 				console.log(err);
 			}
-			res.render('userprofile', {
+			res.render('sellerprofile', {
 				user: user,
 				crop: user.cropArr
 			});
