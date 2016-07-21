@@ -167,37 +167,6 @@ router.post('/uploadphoto/:cid', upload.single('file'), function(req,res,next){
 	});
 });
 
-router.post('/creategarden', function(req, res, next) {
-	//console.log("LOOK HERE: ", req.body)
-	var newCrop = new models.Crop ({
-		cropname: req.body.cropname,
-		price: req.body.price,
-		unit: req.body.per,
-		status: req.body.status,
-		instore: req.body.instore,
-		notes: req.body.notes
-	});
-	newCrop.save(function(err, success) {
-		if (err) {
-			console.log(err);
-		}
-		else {
-			User.findByIdAndUpdate(req.user._id, {
-				'cropArr': req.user.cropArr.concat(newCrop._id)
-			}, function(err, user) {
-				if (err) {
-					console.log(err);
-					next(err)
-				}
-				else {
-					console.log("CREATED NEW CROP", req.user);
-					res.redirect('/myprofile')
-				}
-			})
-		}
-	})
-});
-
 router.get('/becomeseller', function(req, res, next) {
 	res.render('becomeseller');
 });

@@ -46,8 +46,6 @@ module.exports = function(passport) {
 	});
 
 	router.post('/login', passport.authenticate('local'), function(req, res, next){
-		//console.log('passport', passport);
-		console.log('TESTING: ', req.user)
 	   res.redirect('/home');
 	});
 
