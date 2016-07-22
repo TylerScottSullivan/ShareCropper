@@ -197,6 +197,10 @@ router.post('/transactions', function(req, res, next) {
 	});
 });
 
+router.post('/charge', function(req, res, next) {
+	
+})
+
 router.get('/myprofile', function(req, res, next) {
 	User.findOne({_id: req.user._id}).populate('cropArr').exec(function(err, user) {
 		if (err) {

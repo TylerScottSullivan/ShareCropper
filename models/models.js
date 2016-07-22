@@ -124,8 +124,8 @@ var MessageSchema = new mongoose.Schema({
 
 var TransactionSchema = new mongoose.Schema({
 	cropArr: [{
-		type: Object
-
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Crop"
 	}],
 	total: {
 		type: Number,
