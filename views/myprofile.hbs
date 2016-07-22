@@ -1,16 +1,24 @@
-{{> navbar this}}
 
+{{> navbar this}}
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			Profile pic here
 		</div>
-		<div class="col-sm-7">
+		<div class="col-sm-6">
 			<h3>{{user.first}}'s Profile</h3>
 		</div>
 		<div class="col-sm-1">
 			<a href="/home">Back home</a>
+		</div>
+			<div class="col-sm-1">
+				<a href="/sellerstatus">
+				<button type="submit" class="btn btn-success">Become seller</button>
+				</a>
+			</div>
+		<div class="col-sm-1">
+			<a href="/editprofile">Edit Profile</a>
 		</div>
 	</div>
 
@@ -19,16 +27,8 @@
 			<p>Basic user information:<br>
 				Full Name: {{user.first}} {{user.last}}<br>
 				E-mail: {{user.email}}<br>
-				{{#if user.seller}}
-				Seller: True<br>
-				{{else}}
-				Seller: False<br>
-				{{/if}}
-				{{#if user.grower}}
-				Grower: True<br>
-				{{else}}
-				Grower: False<br>
-				{{/if}}
+				Seller: {{user.seller}}<br>
+				Grower: {{user.grower}}<br>
 			</p>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 	</div>
 
 	<div class="row">
-		<a href="/creategarden">Add a plot</a>
+		<a href="/creategarden"><button type="submit" class="btn btn-primary">Add a plot</button></a>
 		<div class="col-sm-10 col-sm-offset-1">
 			{{#each crop}}
 			<div class="row" style="border: 2px solid black">

@@ -45,6 +45,10 @@ var UserSchema = new mongoose.Schema({
     cropArr: [{
     	type: mongoose.Schema.Types.ObjectId,
     	ref: 'Crop'
+    }],
+    following: [{
+    	type: mongoose.Schema.Types.ObjectId,
+    	ref: 'Follows'
     }]
 });
 
@@ -147,11 +151,13 @@ var TransactionSchema = new mongoose.Schema({
 var FollowSchema = new mongoose.Schema({
 	iamfollower: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: true
+		required: true,
+		ref: "User"
 	},
 	iamfollowed: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: true
+		required: true,
+		ref: "User"
 	}
 });
 
