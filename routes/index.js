@@ -39,8 +39,11 @@ router.get('/messages', function(req, res, next) {
 });
 
 router.get('/map', function(req, res, next) {
-	console.log(req.user.cropArr)
-	res.render('map');
+	console.log(req.user.address)
+	res.render('map',{
+		address: req.user.address,
+		
+	});
 });
 
 router.get('/cardinfo', function(req, res, next) {
