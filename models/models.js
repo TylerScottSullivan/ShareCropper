@@ -99,6 +99,10 @@ var MessageSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		required: true
 	},
+	fromName: {
+		type: String,
+		required: true
+	},
 	messagecontent: {
 		type: String,
 		required: true
@@ -116,6 +120,10 @@ var MessageSchema = new mongoose.Schema({
 		type: Boolean,
 		required: true,
 		default: false
+	},
+	room: {
+		type: String,
+		required: true
 	}
 });
 

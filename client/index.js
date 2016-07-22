@@ -1,68 +1,9 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var moment = require('moment');
 
 var messages = [{name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}, {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}]
 // var messages = []
-
-var MessageBox = React.createClass({
-	render: function() {
-
-		return (
-				<div className='message-box'>
-					<div className='message-header'>
-						<div className='message-name'>
-							{this.props.name}
-						</div>
-						<div className='message-preview-time'>
-							{this.props.time}
-						</div>
-					</div>
-					<div className='message-preview'>
-							{this.props.body}
-					</div>
-				</div>
-		);
-	}
-});
-
-var MessageSender = React.createClass({
-	render: function() {
-		 return (
-			<div className='message-sender'>
-				Steven Lin
-			</div>
-		 )
-	}
-})
-
-
-var MessageBody = React.createClass({
-	render: function() {
-		return (
-
-				<div className='message-body'>
-					<div className='sender-message-object send-btn'>
-						<div className='sender-message-content'>
-							Tyler what are you doing tonight?
-						</div>
-						<div className='sender-message-time'>
-							9:30 PM 7/19/16
-						</div>
-					</div>
-					<div className='receiver-message-object request-btn'>
-						<div className='receiver-message-content'>
-							Idk man I am just chilling out at Ihouse. You wanna do something?
-						</div>
-						<div className='receiver-message-time'>
-							9:31 PM 7/19/16
-						</div>
-					</div>
-				</div>
-		)
-	}
-})
-
-
 
 var App = React.createClass({
 
@@ -70,23 +11,60 @@ var App = React.createClass({
   getInitialState: function() {
     return {
       socket: io(),
+      sentMessages: [],
       messages: [{name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}, {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}],
-      newmessage: ''
+      newmessage: '',
+      rooms: []
     }   
   },
+
+  componentDidUpdate: function(nextProps, nextState) {
+  		console.log(this.refs, 'this refs')
+  		if (this.state.sentMessages.length !== nextState.sentMessages.length) {
+		  	var scrolling = ReactDOM.findDOMNode(this.refs.scroll);
+
+	  		if(scrolling) {
+				scrolling.scrollTop = scrolling.scrollHeight;
+			}
+  		}
+        return true;
+  },
   componentDidMount: function() {
+
+  	// var scrolling = this.refs.scroll.getDOMNode();
+  	// scrolling.scrollTop = scrolling.scrollHeight;
 
     // WebSockets Receiving Event Handlers
     this.state.socket.on('connect', function() {
       console.log('connected');
-      // YOUR CODE HERE (2)
-
+      console.log(ids[0], 'mine');
+      console.log(ids[1], 'theirs');
       this.state.socket.emit('Ids', ids);
-
-
-
-
     }.bind(this));
+
+
+    this.state.socket.on('loadMessages', function(data) {
+    	this.setState({
+    		sentMessages: this.state.sentMessages.concat(data.map(function(message, item) {
+    			return message
+    		}))
+    	})
+    }.bind(this));
+
+
+    this.state.socket.on('messageSent', function(data) {
+    	console.log(data, "data")
+
+		this.setState({
+			sentMessages: this.state.sentMessages.concat(data)
+		})
+		console.log(this.state.sentMessages)
+    }.bind(this));
+
+
+
+
+
 
     this.state.socket.on('message', function(message) {
       console.log('got new message', message)
@@ -106,6 +84,12 @@ var App = React.createClass({
 
   Send: function(event) {
   	console.log(this.state.newmessage);
+  	var messageSending = this.state.newmessage;
+  	console.log(messageSending, "message sending")
+  	this.state.socket.emit('Send', messageSending);
+  	this.setState({
+  		newmessage: ''
+  	})
   },
 
 
@@ -137,21 +121,23 @@ var App = React.createClass({
 			</div>
 			<div className='right-user-column-message'>
 				<div className='message-view-panel'>
-					<div className='messages-expanded'>
+					<MessageSender/>
+					<div className='message-box-below-title'>
+						<div className='messages-expanded' ref="scroll">
 
-						<MessageSender/>
-						<MessageBody/>
+							<MessageBody sentMessages={this.state.sentMessages}/>
 
-					</div>
-					<div className='message-input-box'>
-						<textarea type='text' className='message-input-field' onChange={this.onTextInput}>
-						</textarea>
-						<div className='message-input-button-box'>
-							<div className='message-input-button send-btn' onClick={this.Send}>
-								Send
-							</div>
-							<div className='message-input-button request-btn'>
-								Request
+						</div>
+						<div className='message-input-box'>
+							<textarea type='text' className='message-input-field' onChange={this.onTextInput} value={this.state.newmessage}>
+							</textarea>
+							<div className='message-input-button-box'>
+								<div className='message-input-button send-btn' onClick={this.Send}>
+									Send
+								</div>
+								<div className='message-input-button request-btn'>
+									Request
+								</div>
 							</div>
 						</div>
 					</div>
@@ -165,5 +151,95 @@ var App = React.createClass({
     );
   }
 });
+
+
+var MessageBox = React.createClass({
+	render: function() {
+
+		return (
+				<div className='message-box'>
+					<div className='message-header'>
+						<div className='message-name'>
+							{this.props.name}
+						</div>
+						<div className='message-preview-time'>
+							{this.props.time}
+						</div>
+					</div>
+					<div className='message-preview'>
+							{this.props.body}
+					</div>
+				</div>
+		);
+	}
+});
+
+var MessageSender = React.createClass({
+	render: function() {
+		 return (
+			<div className='message-sender'>
+				Steven Lin
+			</div>
+		 )
+	}
+});
+
+
+var MessageBody = React.createClass({
+	render: function() {
+		return (
+
+				<div className='message-body'>
+					{this.props.sentMessages.map(function(message, item) {
+						return message.from === ids[0] ? 
+							<MessageSent key={item} content={message.messagecontent} time={message.timesent}/>
+						:
+							 <MessageReceived key={item} content={message.messagecontent} time={message.timesent}/>
+						})
+					}
+				</div>
+		)
+	}
+});
+
+
+var MessageSent = React.createClass({
+	render: function() {
+		return (
+				<div className='sender-message-object request-btn'>
+					<div className='sender-message-content'>
+						{this.props.content}
+					</div>
+					<div className='sender-message-time'>
+						{moment(new Date()).format('MM/DD/YY') === moment(this.props.time).format('MM/DD/YY') ?
+							moment(this.props.time).format('h:mm A ')
+							:
+							moment(this.props.time).format('h:mm A M/DD/YY')
+						}
+					</div>
+				</div>
+			)
+	}
+})
+
+var MessageReceived = React.createClass({
+	render: function() {
+		return (
+				<div className='receiver-message-object send-btn'>
+					<div className='receiver-message-content'>
+						{this.props.content}
+					</div>
+					<div className='receiver-message-time'>
+						{moment(new Date()).format('MM/DD/YY') === moment(this.props.time).format('MM/DD/YY') ?
+							moment(this.props.time).format('h:mm A ')
+							:
+							moment(this.props.time).format('h:mm A M/DD/YY')
+						}
+					</div>
+				</div>
+			)
+	}
+})
+
 
 ReactDOM.render(<App />, document.getElementById('root'));

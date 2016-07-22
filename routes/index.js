@@ -203,6 +203,10 @@ router.get('/profile/:id', function(req, res, next) {
 	};
 });
 
+router.get('/messageold', function(req, res, next) {
+	res.render('messageoldview')
+})
+
 
 router.get('/message/:id', function(req, res, next) {
 	res.render('messages', {

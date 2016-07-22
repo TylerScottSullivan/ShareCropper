@@ -149,23 +149,62 @@ app.use(function(err, req, res, next) {
 
 io.on('connection', function (socket) {
   console.log('connected');
+
   socket.on('Ids', function(Ids) {
-    console.log(Ids, 'Ids');
+          console.log(Ids, 'Ids');
 
-    models.Messages.find({$or: [{from: Ids[0], to: Ids[1]}, {from: Ids[1], to:Ids[0]}]}, function(err, messages) {
-      if(err) {
-        console.log(err)
-      } else {
-        console.log(messages)
-      }
-    })
 
-    var room = Ids.sort().join(',');
-    socket.join(room, function() {
-      console.log('Successfully joined ' + room);
-    }) 
+          var unsortedIds = [];
+          for (var i = 0 ; i < Ids.length; i++) {
+              unsortedIds.push(Ids[i]);
+          }
+          var sortedIds = Ids.sort();
+          socket.room = sortedIds.join(',');
+          socket.join(socket.room, function() {
+            console.log('Successfully joined ' + socket.room);
+          }) 
 
+          models.Messages.find({$or: [{from: Ids[0], to: Ids[1]}, {from: Ids[1], to:Ids[0]}]}, function(err, messages) {
+            if(err) {
+              console.log(err)
+            } else {
+              console.log(messages)
+              socket.emit('loadMessages', messages)
+              socket.to(socket.room).emit('loadMessages', messages)
+            }
+          })
+
+
+          socket.on('Send', function(messageSending) {
+            console.log('Successfully sent ' + messageSending);
+            console.log(unsortedIds[1], 'their ID');
+            console.log(unsortedIds[0], 'my Id');
+            models.User.findById(unsortedIds[1], function(err, user ){
+              if (err) {
+                console.log(err)
+              } else {
+                  var newMessage = new models.Messages({
+                    to: unsortedIds[1],
+                    from: unsortedIds[0],
+                    fromName: user.first + ' ' + user.last,
+                    messagecontent: messageSending,
+                    timesent: new Date(),
+                    room: socket.room
+                  });
+                  newMessage.save(function(err, success) {
+                      if (err) {
+                          console.log(err);
+                      } else {
+                        console.log('successfully saved message')
+                        socket.emit('messageSent', newMessage)
+                        socket.to(socket.room).emit('messageSent', newMessage)
+                      }
+                  })
+              }
+            })
+          })
   })
+
 
 
 

@@ -479,22 +479,35 @@ a:hover {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-start;
 	/*background-color: orange;*/
 
 }
 
-.messages-expanded {
-
+.message-box-below-title {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
+
+.messages-expanded {
+	overflow-y: auto;
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.messages-expanded::-webkit-scrollbar { width: 0 !important }
 
 .message-body {
 	display: flex;
 	flex-direction: column;
-
 }
 
-.sender-message-object {
+.receiver-message-object {
 	padding: 10px;
 	margin: 5px;
 	border-radius: 10px;
@@ -505,20 +518,20 @@ a:hover {
 
 }
 
-.sender-message-content {
+.receiver-message-content {
 	font-weight: 600;
 	padding-bottom: 5px;
 
 }
 
-.sender-message-time {
+.receiver-message-time {
 	font-weight: 400px;
 	font-size: 12px;
 
 
 }
 
-.receiver-message-object {
+.sender-message-object {
 	align-self: flex-end;
 	background-color: #ffff66;
 	padding: 10px;
@@ -530,14 +543,14 @@ a:hover {
 
 }
 
-.receiver-message-content {
+.sender-message-content {
 	font-weight: 600;
 	padding-bottom: 5px;
 
 
 }
 
-.receiver-message-time {
+.sender-message-time {
 	font-weight: 400px;
 	font-size: 12px;
 	align-self: flex-end;
@@ -557,6 +570,7 @@ a:hover {
 .message-input-field {
 	height: 45px;
 	width: 630px;
+	overflow: visible ;
 
 }
 
