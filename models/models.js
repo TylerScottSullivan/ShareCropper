@@ -49,7 +49,11 @@ var UserSchema = new mongoose.Schema({
     following: [{
     	type: mongoose.Schema.Types.ObjectId,
     	ref: 'Follows'
-    }]
+    }],
+    defaultPayment: {
+    	type: mongoose.Schema.Types.ObjectId,
+    	ref: 'Payment'
+    }
 });
 
 var CropSchema = new mongoose.Schema({
@@ -136,15 +140,21 @@ var TransactionSchema = new mongoose.Schema({
 	},
 	purchaser: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: true
+		required: true,
+		ref: "User"
 	},
 	seller: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: true
+		required: true,
+		ref: "User"
 	},
 	timedate: {
 		type: Date,
 		required: true
+	},
+	payment: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Payment"
 	}
 });
 
@@ -161,6 +171,37 @@ var FollowSchema = new mongoose.Schema({
 	}
 });
 
+var PaymentSchema = mongoose.Schema({
+  stripeBrand: {
+  	type: String
+  },
+  stripeCustomerId: {
+  	type: String
+  },
+  stripeExpMonth: {
+  	type: Number
+  },
+  stripeExpYear: {
+  	type: Number
+  },
+  stripeLast4: {
+  	type: Number
+  },
+  stripeSource: {
+    type: String,
+    required: true
+  },
+  status: {
+    type: Number,
+    default: 100
+  },
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
+});
+
 UserSchema.plugin(findOrCreate);
 // Create all of your models/schemas here, as properties.
 var models = {
@@ -169,7 +210,8 @@ var models = {
 	Notifications: mongoose.model('Notifications', NotificationSchema),
 	Messages: mongoose.model('Messages', MessageSchema),
 	Transactions: mongoose.model('Transactions', TransactionSchema),
-	Follows: mongoose.model('Follows', FollowSchema)
+	Follows: mongoose.model('Follows', FollowSchema),
+	Payment: mongoose.model('Payment', PaymentSchema)
 };
 
 module.exports = models;

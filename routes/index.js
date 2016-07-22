@@ -3,8 +3,8 @@ var router = express.Router();
 var models = require('../models/models')
 var User = models.User;
 var Follows = models.Follows;
-
-
+var stripe = require('stripe')('sk_test_wPtspeIvcc1USPTV5vxYHkSU');
+var Payment = models.Payment;
 var Crop = models.Crop;
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
@@ -164,6 +164,39 @@ router.get('/transactions', function(req, res, next) {
 	res.render('transactions');
 });
 
+router.post('/transactions', function(req, res, next) {
+	// Make sure their shit is there
+	if (!(req.body.stripeToken && req.body.stripeEmail)) {
+		return res.render('transactions', {
+			error: "One or more required fields is missing"
+		});
+	}
+	// Now create a customer
+	stripe.customers.create({
+		source: req.body.stripeToken,
+		email: req.body.stripeEmail
+	}, function(err, customer) {
+		if (err) return next(err);
+	// Save customer to our server
+		Payment.create({
+			stripeCustomerId: customer.id,
+			parent: req.user._id,
+			stripeSource: customer.sources.data[0].id,
+			stripeLast4: customer.sources.data[0].last4,
+			stripeBrand: customer.sources.data[0].brand,
+			stripeExpMonth: customer.sources.data[0].exp_month,
+			stripeExpYear: customer.sources.data[0].exp_year
+		}, function(err, payment) {
+			if (err) return next(err);
+			// Add payment to user
+			User.findByIdAndUpdate(req.user.id, {defaultPayment: payment._id}, function(err) {
+				if (err) return next(err);
+				res.redirect('/home');
+			});
+		});
+	});
+});
+
 router.get('/myprofile', function(req, res, next) {
 	User.findOne({_id: req.user._id}).populate('cropArr').exec(function(err, user) {
 		if (err) {
@@ -189,13 +222,6 @@ router.get('/sellerstatus', function(req, res, next) {
 		}
 	})
 })
-
-// router.get('/profile/:id', function(req, res, next) {
-// 	res.render('sellerprofile', {
-// 		user: req.user
-// 	});
-// });
-
 
 router.get('/profile/:id', function(req, res, next) {
 	if (req.params.id.toString() === req.user._id.toString()) {
