@@ -109,7 +109,8 @@ var MessageSchema = new mongoose.Schema({
 	},
 	timesent: {
 		type: Date,
-		required: true
+		required: true,
+		index: true
 	},
 	class: {
 		type: String,

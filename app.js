@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var _ = require('underscore');
 
 // express-session: sets req.cookies on all requests sent to your website
 var session = require('express-session');
@@ -149,6 +150,28 @@ app.use(function(err, req, res, next) {
 
 io.on('connection', function (socket) {
   console.log('connected');
+
+  var rooms = {};
+
+  models.Messages.find({}, function(err, messageObjects) {
+    var timeArray = _.sortBy(messageObjects, 'timesent');
+    var roomArray = _.groupBy(timeArray, 'room');
+    console.log(timeArray, "ARRAY OF MESSAGES SORTED BY TIME");
+    console.log(roomArray, "ARRAY OF MESSAGED SORTED BY TIME BY ROOM")
+    socket.emit('loadInbox', roomArray);
+      // messageObjects.forEach(function(message) {
+      // if(rooms[message.room]) {
+
+      // } else {
+      //   rooms.push({roomid: message.room, room: message})
+      // }
+    // })
+  })
+
+
+
+
+
 
   socket.on('Ids', function(Ids) {
           console.log(Ids, 'Ids');

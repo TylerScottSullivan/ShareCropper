@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var moment = require('moment');
+var _ = require('underscore');
 
 var messages = [{name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}, {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}]
 // var messages = []
@@ -12,9 +13,9 @@ var App = React.createClass({
     return {
       socket: io(),
       sentMessages: [],
+      InboxArray: [],
       messages: [{name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}, {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"}],
       newmessage: '',
-      rooms: []
     }   
   },
 
@@ -50,6 +51,22 @@ var App = React.createClass({
     		}))
     	})
     }.bind(this));
+
+    this.state.socket.on('loadInbox', function(roomArray) {
+    	console.log(roomArray);
+
+    	var InboxArray = _.map(roomArray, function(messageArray) {
+    		var lastMessage = messageArray[messageArray.length - 1];
+    		return [lastMessage.timesent, lastMessage, lastMessage.room];
+    	})
+
+    	var timeSortedInboxArray = _.sortBy(InboxArray, function(InboxItem){
+    		return -InboxItem[0];
+    	})
+
+    	console.log(timeSortedInboxArray, "SORTED TIMME INBOX ARRAY HERE I AM HERE I AM")
+
+    })
 
 
     this.state.socket.on('messageSent', function(data) {
