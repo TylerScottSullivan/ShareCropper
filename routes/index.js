@@ -198,18 +198,9 @@ router.get('/sellerstatus', function(req, res, next) {
 
 
 router.get('/profile/:id', function(req, res, next) {
-<<<<<<< HEAD
-	console.log(req.params.id, 'id of profile')
-	console.log(req.user._id, 'id of user')
-	//if (toString(req.params.id) === toString(req.user._id)) {
-	if (req.params.id.toString() === req.user._id.toString()) {
-        res.redirect('/myprofile')
-    }
-=======
 	if (req.params.id.toString() === req.user._id.toString()) {
 		res.redirect('/myprofile')
 	}
->>>>>>> origin/master
 	else {
 		User.findOne({_id: req.params.id}).populate('cropArr following').exec(function(err, user) {
 			if (err) {

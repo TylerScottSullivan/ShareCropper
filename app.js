@@ -147,106 +147,72 @@ app.use(function(err, req, res, next) {
 });
 
 // websockets
-
-io.on('connection', function (socket) {
+io.on('connection', function(socket) {
   console.log('connected');
 
   var rooms = {};
 
-  models.Messages.find({}, function(err, messageObjects) {
+  models.Messages.find({}, function(err, messageObjets) {
     var timeArray = _.sortBy(messageObjects, 'timesent');
     var roomArray = _.groupBy(timeArray, 'room');
     console.log(timeArray, "ARRAY OF MESSAGES SORTED BY TIME");
-    console.log(roomArray, "ARRAY OF MESSAGED SORTED BY TIME BY ROOM")
+    console.log(roomArray, "ARRAY OF MESSAGES SORTED BY TIME BY ROOM")
     socket.emit('loadInbox', roomArray);
-      // messageObjects.forEach(function(message) {
-      // if(rooms[message.room]) {
-
-      // } else {
-      //   rooms.push({roomid: message.room, room: message})
-      // }
-    // })
   })
-
-
-
-
-
 
   socket.on('Ids', function(Ids) {
-          console.log(Ids, 'Ids');
+    console.log(Ids, 'Ids');
 
+    var unsortedIds = [];
+    for (var i=0; i<Ids.length; i++) {
+      unsortedIds.push(Ids[i]);
+    }
+    var sortedIds = Ids.sort();
+    socket.room = sortedIds.join(',');
+    socket.join(socket.room, function() {
+      console.log('Successfully joined ' + socket.room);
+    })
 
-          var unsortedIds = [];
-          for (var i = 0 ; i < Ids.length; i++) {
-              unsortedIds.push(Ids[i]);
-          }
-          var sortedIds = Ids.sort();
-          socket.room = sortedIds.join(',');
-          socket.join(socket.room, function() {
-            console.log('Successfully joined ' + socket.room);
-          }) 
+    models.Messages.find({$or: [{from: Ids[0], to: Ids[1]}, {from: Ids[1], to: Ids[0]}]}, function(err, messages) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(messages)
+        socket.emit('loadMessages', messages)
+        socket.to(socket.room).emit('loadMessages',messages)
+      }
+    })
 
-          models.Messages.find({$or: [{from: Ids[0], to: Ids[1]}, {from: Ids[1], to:Ids[0]}]}, function(err, messages) {
-            if(err) {
-              console.log(err)
+    socket.on('send', function(messageSending) {
+      console.log('Successfully sent ' + messageSending);
+      console.log(unsortedIds[1], 'their ID');
+      console.log(unsortedIds[0], 'my Id');
+      models.User.findById(unsortedIds[1], function(err, user) {
+        if (err) {
+          console.log(err)
+        } else {
+          var newMessage = new models.Messages({
+            to: unsortedIds[1],
+            from: unsortedIds[0],
+            fromName: user.first + ' ' + user.last,
+            messagecontent: messageSending,
+            timesent: new Date(),
+            room: socket.room
+          });
+          newMessage.save(function(err, success) {
+            if (err) {
+              console.log(err);
             } else {
-              console.log(messages)
-              socket.emit('loadMessages', messages)
-              socket.to(socket.room).emit('loadMessages', messages)
+              console.log('Successfully saved message')
+              socket.emit('messageSent', newMessage)
+              socket.to(socket.room).emit('messageSent', newMessage)
             }
           })
-
-
-          socket.on('Send', function(messageSending) {
-            console.log('Successfully sent ' + messageSending);
-            console.log(unsortedIds[1], 'their ID');
-            console.log(unsortedIds[0], 'my Id');
-            models.User.findById(unsortedIds[1], function(err, user ){
-              if (err) {
-                console.log(err)
-              } else {
-                  var newMessage = new models.Messages({
-                    to: unsortedIds[1],
-                    from: unsortedIds[0],
-                    fromName: user.first + ' ' + user.last,
-                    messagecontent: messageSending,
-                    timesent: new Date(),
-                    room: socket.room
-                  });
-                  newMessage.save(function(err, success) {
-                      if (err) {
-                          console.log(err);
-                      } else {
-                        console.log('successfully saved message')
-                        socket.emit('messageSent', newMessage)
-                        socket.to(socket.room).emit('messageSent', newMessage)
-                      }
-                  })
-              }
-            })
-          })
+        }
+      })
+    })
   })
-
-
-
-
-
-
-
-// get socket.username
-  // io.on('username', function(username) {
-  //   // ...
-  // models.message.find({$or: [from: socket.username, to: socket.username]}, function(err, messages) {
-  //   //handle error
-  //   messages.forEach(function(message) {
-  //     socket.join(generateRoomname(message.from, message.to))
-  //     socket.emit('message', {name: 'Austin Hawkins', time: '10:39 PM', body: "hey whats up"})
-  //   })
-  // })
-  // })
 })
-
 
 var port = process.env.PORT || 3000;
 server.listen(port, function() {
