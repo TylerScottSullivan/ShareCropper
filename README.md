@@ -1,5 +1,5 @@
 # ShareCropper
-P2P platform allowing gardeners to sell crops to neighbors.
+P2P platform allowing gardeners to sell crops to neighbors - WIP
 
 ![](sharecropper screenshot 1.jpg)
 
