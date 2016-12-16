@@ -15,208 +15,13 @@ a:hover {
 	text-decoration: none;
 }
 
+textarea {
+	resize: none;
+}
+
 @font-face {
 	font-family: poster;
 	src: url('/fonts/SansPosterBold.ttf');
-}
-.navbarr {
-/*	padding: 0;
-	margin: 0;*/
-	background: white;
-	display: flex;
-	justify-content: space-between;
-	height: 50px;
-	font-weight: bold;
-	/*font-family: poster;*/
-	color: black;
-/*	width: 100%;*/
-}
-
-.logo {
-	font-size: 20px;
-	font-family: poster;
-}
-
-.land-btn {
-	margin: 0 10px;
-	/*text-align: center;*/
-}
-
-.flex-ctr {
-	display: flex;
-	align-items: center;
-	padding: 0 10px;
-	border: none;
-	background: none;
-}
-
-.flex-ctrrr {
-	display: flex;
-	align-items: center;
-	padding: 0 10px;
-	border: none;
-	background: none;
-}
-
-
-.flex-ctrr {
-	display: flex;
-	align-items: center;
-	color: #737373;
-}
-
-.flex-ctr:hover {
-	background-color: #f1f1f1;
-	color: black;
-}
-}
-
-#search {
-	height: 25px;
-}
-
-
-.in-line {
-	display: flex;
-	flex-direction: row;
-}
-
-
-.contain {
-	height: 600px;
-	width: 100%;
-}
-
-.bodyy {
-	background: url('/images/soil.jpg');
-	background-repeat: no-repeat;
-	/*background-size: cover;*/
-	background-color: black;
-	background-position: 0px -150px;
-	/*background-size: contain;*/
-	position: relative;
-/*	height: 600px;*/
-	width: 100%;
-	height: 100%;
-/*	min-width: 1600px;*/
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-}
-
-#sc-title {
-	font-size: 90px;
-	color: white;
-	font-weight: 700px;
-	font-family: poster;
-}
-
-.btn-line {
-	display: flex;
-	justify-content: center;
-	color: black;
-	font-weight: 700px;
-	font-family: poster;
-}
-
-.land-btns {
-	margin: 80px 50px;
-	font-size: 35px;
-	padding: 20px;
-	border-style: solid;
-	border-radius: 10px;
-}
-
-.land-btns:hover {
-	color: white;
-	background-color: black;
-}
-
-.btn-sd-line {
-	display: flex;
-	justify-content: center;
-	color: black;
-	font-weight: 700px;
-	font-family: poster;
-}
-
-.btm-btn {
-	font-size: 25px;
-	margin: 30px 30px 10px 30px;
-}
-
-.drop {
-	height: 50px;
-}
-
-.dropp {
-	height: 40px;
-	background-color: #f1f1f1;
-	border-style: solid;
-	border-width: thin;
-	border-color: #a6a6a6;
-}
-
-.dropp:hover {
-	background-color: white;
-}
-
-.quer {
-	width: 300px;
-	height: 30px;
-	padding: 0 0 0 10px;
-}
-
-.icon {
-	height: 30px;
-}
-
-.search-bar-home {
-	margin-top: 45px;
-	display: flex;
-	align-items: center;
-	padding: 0 10px;
-	border: none;
-	background: none;
-	height: 90px;
-
-}
-
-.quer-home {
-	width: 420px;
-	padding: 5px 0 0 10px;
-	height: 40px;
-	/*font-weight: bold;*/
-	font-size: 20px;
-	border: 0;
-	border-style: solid;
-	border-right-color: #a6a6a6;
-	border-right-width: 1px;
-
-}
-
-.search-home-icon {
-	height: 40px;
-	width: 40px;
-	padding: 5px 0 0 0;
-	align-items: center;
-	border: none;
-	background: white;
-	border: 0;
-}
-
-.quer-location {
-	width: 200px;
-	padding: 5px 0 0 10px;
-	height: 40px;
-	/*font-weight: bold;*/
-	font-size: 20px;
-	border: 0;
-	border-style: solid;
-	border-right-color: #a6a6a6;
-	border-right-width: 1px;
-<<<<<<< HEAD
 }
 
 
@@ -300,7 +105,6 @@ a:hover {
 .crop-box {
 	margin: 30px 0 0 0 ;
 	padding: 20px;
-	/*background-color: pink;*/
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -327,9 +131,6 @@ a:hover {
 	position: relative;
 	display: flex;
 	flex-flow: row wrap;
-	/*justify-content: flex-start;*/
-
-
 }
 
 .crop-grid-unit {
@@ -603,7 +404,189 @@ a:hover {
 
 }
 
-textarea {
-	resize: none;
+.navbarr {
+	background: white;
+	display: flex;
+	justify-content: space-between;
+	height: 50px;
+	font-weight: bold;
+	color: black;
 }
 
+.logo {
+	font-size: 20px;
+	font-family: poster;
+}
+
+.land-btn {
+	margin: 0 10px;
+}
+
+.flex-ctr {
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	border: none;
+	background: none;
+}
+
+.flex-ctrrr {
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	border: none;
+	background: none;
+}
+
+
+.flex-ctrr {
+	display: flex;
+	align-items: center;
+	color: #737373;
+}
+
+.flex-ctr:hover {
+	background-color: #f1f1f1;
+	color: black;
+}
+}
+
+#search {
+	height: 25px;
+}
+
+
+.in-line {
+	display: flex;
+	flex-direction: row;
+}
+
+.contain {
+	height: 600px;
+	width: 100%;
+}
+
+.bodyy {
+	background: url('/images/soil.jpg');
+	background-repeat: no-repeat;
+	background-color: black;
+	background-position: 0px -150px;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#sc-title {
+	font-size: 90px;
+	color: white;
+	font-weight: 700px;
+	font-family: poster;
+}
+
+.btn-line {
+	display: flex;
+	justify-content: center;
+	color: black;
+	font-weight: 700px;
+	font-family: poster;
+}
+
+.land-btns {
+	margin: 80px 50px;
+	font-size: 35px;
+	padding: 20px;
+	border-style: solid;
+	border-radius: 10px;
+}
+
+.land-btns:hover {
+	color: white;
+	background-color: black;
+}
+
+.btn-sd-line {
+	display: flex;
+	justify-content: center;
+	color: black;
+	font-weight: 700px;
+	font-family: poster;
+}
+
+.btm-btn {
+	font-size: 25px;
+	margin: 30px 30px 10px 30px;
+}
+
+.drop {
+	height: 50px;
+}
+
+.dropp {
+	height: 40px;
+	background-color: #f1f1f1;
+	border-style: solid;
+	border-width: thin;
+	border-color: #a6a6a6;
+}
+
+.dropp:hover {
+	background-color: white;
+}
+
+.quer {
+	width: 300px;
+	height: 30px;
+	padding: 0 0 0 10px;
+}
+
+.icon {
+	height: 30px;
+}
+
+.search-bar-home {
+	margin-top: 45px;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	border: none;
+	background: none;
+	height: 90px;
+
+}
+
+.quer-home {
+	width: 420px;
+	padding: 5px 0 0 10px;
+	height: 40px;
+	font-size: 20px;
+	border: 0;
+	border-style: solid;
+	border-right-color: #a6a6a6;
+	border-right-width: 1px;
+
+}
+
+.search-home-icon {
+	height: 40px;
+	width: 40px;
+	padding: 5px 0 0 0;
+	align-items: center;
+	border: none;
+	background: white;
+	border: 0;
+}
+
+.quer-location {
+	width: 200px;
+	padding: 5px 0 0 10px;
+	height: 40px;
+	font-size: 20px;
+	border: 0;
+	border-style: solid;
+	border-right-color: #a6a6a6;
+	border-right-width: 1px;
+}
